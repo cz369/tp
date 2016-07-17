@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap的HTML标准模板</title>   
+        <!-- Bootstrap 
+        <link href="__CSS__/bootstrap.min.css" rel="stylesheet">-->
+        <css href='../../../Public/css/bootstrap.min.css' />
+
+        <css href='../../../Public/css/bootstrap-treeview.min.css' />
+               <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
+        <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
+        <!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+        <script src="../../../Public/js/bootstrap-treeview.min.js"></script> 
+
+        <script>
+alert("My First JavaScript");
+</script>
+<script>
+
+function getTree() {
+  // Some logic to retrieve, or generate tree structure
+  var data = [
+  {
+    text: "Parent 1",
+    nodes: [
+      {
+        text: "Child 1",
+        nodes: [
+          {
+            text: "Grandchild 1"
+          },
+          {
+            text: "Grandchild 2"
+          }
+        ]
+      },
+      {
+        text: "Child 2"
+      }
+    ]
+  },
+  {
+    text: "Parent 2"
+  },
+  {
+    text: "Parent 3"
+  },
+  {
+    text: "Parent 4"
+  },
+  {
+    text: "Parent 5"
+  }
+];
+  return data;
+}
+
+function myFunction()
+{
+	$('#tree').treeview({data: getTree()});
+}
+
+$(document).ready(myFunction);
+
+</script>
+
+        <!--你自己的样式文件 -->
+             
+        <!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+<!--<div id="tree"></div>-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span8">
+			<form class="form-horizontal">
+				<div class="control-group">
+					 <label class="control-label" for="inputEmail">邮箱</label>
+					<div class="controls">
+						<input id="inputEmail" type="text" />
+					</div>
+				</div>
+				<div class="control-group">
+					 <label class="control-label" for="inputPassword">密码</label>
+					<div class="controls">
+						<input id="inputPassword" type="password" />
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						 <label class="checkbox"><input type="checkbox" /> Remember me</label> <button type="submit" class="btn">登陆</button>
+					</div>
+				</div>
+			</form>
+			<ol>
+				<li>
+					新闻资讯
+				</li>
+				<li>
+					体育竞技
+				</li>
+				<li>
+					娱乐八卦
+				</li>
+				<li>
+					前沿科技
+				</li>
+				<li>
+					环球财经
+				</li>
+				<li>
+					天气预报
+				</li>
+				<li>
+					房产家居
+				</li>
+				<li>
+					网络游戏
+				</li>
+			</ol>
+		</div>
+		<div class="span4">
+			<img alt="140x140" src="img/a.jpg" />
+		</div>
+	</div>
+</div>
+
+
+</div>
+
+ 
+    </body>
+</html>
