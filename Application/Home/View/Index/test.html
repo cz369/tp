@@ -7,17 +7,17 @@
         <title>Bootstrap的HTML标准模板</title>   
         <!-- Bootstrap 
         <link href="__CSS__/bootstrap.min.css" rel="stylesheet">-->
-        <css href='../../../Public/css/bootstrap.min.css' />
+        <css href='../../../Public/css/bootstrap.css' />
 
         <css href='../../../Public/css/bootstrap-treeview.min.css' />
                <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
         <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
         <!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.js"></script> 
         <script src="../../../Public/js/bootstrap-treeview.min.js"></script> 
 
         <script>
-alert("My First JavaScript");
+
 </script>
 <script>
 
@@ -59,13 +59,32 @@ function getTree() {
   return data;
 }
 
+
 function myFunction()
 {
-	$('#tree').treeview({data: getTree()});
+	$.get("__URL__/group",function(data,status){
+		$('#tree').treeview({
+			data: data,
+			onNodeSelected: function(event, data) {
+    		// 事件代码...
+    			alert(data);
+			}
+
+		});
+  	});
 }
 
 $(document).ready(myFunction);
 
+
+$('#tree').on('nodeSelected', function(event, data) {
+      			alert(data);
+
+});             
+$('#tree').on('nodeChecked', function(event, data) {
+      			alert(data);
+
+});           
 </script>
 
         <!--你自己的样式文件 -->
@@ -77,66 +96,92 @@ $(document).ready(myFunction);
         <![endif]-->
     </head>
     <body>
-
-<!--<div id="tree"></div>-->
+<!---->
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span8">
-			<form class="form-horizontal">
-				<div class="control-group">
-					 <label class="control-label" for="inputEmail">邮箱</label>
-					<div class="controls">
-						<input id="inputEmail" type="text" />
-					</div>
-				</div>
-				<div class="control-group">
-					 <label class="control-label" for="inputPassword">密码</label>
-					<div class="controls">
-						<input id="inputPassword" type="password" />
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						 <label class="checkbox"><input type="checkbox" /> Remember me</label> <button type="submit" class="btn">登陆</button>
-					</div>
-				</div>
-			</form>
-			<ol>
-				<li>
-					新闻资讯
-				</li>
-				<li>
-					体育竞技
-				</li>
-				<li>
-					娱乐八卦
-				</li>
-				<li>
-					前沿科技
-				</li>
-				<li>
-					环球财经
-				</li>
-				<li>
-					天气预报
-				</li>
-				<li>
-					房产家居
-				</li>
-				<li>
-					网络游戏
-				</li>
-			</ol>
-		</div>
-		<div class="span4">
-			<img alt="140x140" src="img/a.jpg" />
+<div class="row">
+
+	<div class="col-md-3" id='tree'>
+	</div>
+	<!-- 
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    分组管理
+    <span class="caret"></span>
+  </button>
+ 
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+  	<volist name="group" id="vi" >
+    <li><a href="#">{$vi.group_name}</a></li>
+    </volist>
+  </ul>
+  -->
+
+		<div class="col-md-9">
+			<p>
+				<td>设备属性 当前设备状态： <td>
+			</p>
+			<table class="table">
+				<thead>
+					<tr>
+                      <th>编号</th>
+                      <th>拍照尺寸</th>
+                      <th>拍照质量（1-100之间的整数）</th>
+                      
+                      <th>拍照开始时间（24小时制）</th>
+                      <th>拍照结束时间（24小时制）</th>
+                      <th>拍照频率（分钟）</th>
+                      <th>是否自动拍照</th>
+                    </tr>
+                    <volist name="date" id="vo" >
+                     <tr>
+                    	<td>{$vo.device_id}</td>
+                    	<td>{$vo.device_photo_size}</td>
+                    	<td>{$vo.device_photo_quality}</td>
+        				<td>{$vo.device_photo_starttime}</td>
+        				<td>{$vo.device_photo_endtime}</td>
+        				<td>{$vo.device_frequency}</td>
+        				<td><input type="radio" /> 是</td>
+        			</tr>	
+        			</volist>
+                    
+
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+			<p>
+				历史图片
+			</p><img alt="140x140" src="img/a.jpg" />
+			<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+			<p>
+				当前已选设备编号：  					实时消息：
+			</p>
 		</div>
 	</div>
 </div>
-
-
 </div>
-
+</div>
+<div><?php
+echo "<p> ".date("Y") . © ." 同瑞信息 版权所有</p>";
+?></div>
  
     </body>
 </html>
