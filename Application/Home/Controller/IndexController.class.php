@@ -15,20 +15,46 @@ class IndexController extends Controller {
 			if (!empty($user)) {
 				$this->success('登录成功', 'test');
 				// $this->success("ss", 'test');
+			} else {
+                  $this->error("用户或密码错误！");  
 			}
 			// var_dump($result);
-			var_dump($user);
+			//var_dump($user);
 			
 		} else {
 			$this->display();
+
 		}
+
 		
 		
 		
 	}
+	  
+
+
+	public function device_info_save(){
+		if (IS_POST) {
+			$device_id=$_POST['device_id'];
+
+			$db=M('device');
+
+			$db->device_photo_size=$_POST['device_photo_size'];
+			$db->device_photo_quality=$_POST['device_photo_quality'];
+			$db->device_photo_starttime=$_POST['device_photo_starttime'];
+			$db->device_photo_endtime=$_POST['device_photo_endtime'];
+			$db->device_frequency=$_POST['device_frequency'];
+
+			$db->where("device_id='$device_id'")->save();
+			$this->redirect('test');
+			
+		} else {
+			$this->display();
+		}
+	}	
 	public function test() {
 		$select = M('device');
-		$date = $select->select();
+		$date = $select->where("device_id='node.text'")->select();
 		//var_dump($date);
 		$this->assign("date", $date);
 
@@ -43,6 +69,41 @@ class IndexController extends Controller {
 		$this->display();
 
 	}
+
+	public function update_auto_photo() {
+		if (IS_GET) {
+			$device_id = $_GET['device_id'];
+			$checked = $_GET['checked'];
+
+			var_dump($checked);
+			var_dump($device_id);
+			//判断如果是设备则查询
+			// if ($device_id) {
+			// 	$device = M('device');
+			// 	$device->device_photo_auto
+			// 	$data = $device->where("device_id=$device_id")->select();
+
+			// 	$this->ajaxReturn($data);
+			// }
+		} else {
+			$this->display();
+		}
+	}	
+
+	public function device_info() {
+		if (IS_GET) {
+			$device_id = $_GET['device_id'];
+			//判断如果是设备则查询
+			if ($device_id) {
+				$device = M('device');
+				$data = $device->where("device_id=$device_id")->select();
+
+				$this->ajaxReturn($data);
+			}
+		} else {
+			$this->display();
+		}
+	}	
 
 	public function group() {
 		if (IS_GET) {
