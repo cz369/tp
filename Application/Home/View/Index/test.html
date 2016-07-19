@@ -1,107 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap的HTML标准模板</title>   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style type="text/css">
+  #allmap {width: 100%;height: 100;font-family:"微软雅黑";}
+  </style>
+
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=eE2DKK8r5Z9qVBs00FsDcRG3Mv3I6IGe"></script>
+    <title>Bootstrap的HTML标准模板</title>   
         <!-- Bootstrap 
         <link href="__CSS__/bootstrap.min.css" rel="stylesheet">-->
         <css href='../../../Public/css/bootstrap.css' />
 
         <css href='../../../Public/css/bootstrap-treeview.min.css' />
-               <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
+        <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
         <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
         <!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.js"></script> 
         <script src="../../../Public/js/bootstrap-treeview.min.js"></script> 
+        <script type="text/javascript">
 
-        <script>
+        function myFunction()
+        {
+          $.get("__URL__/group",function(data,status){
+            $('#tree').treeview({
+              data: data,
+              onNodeSelected: function(event, node) {
+            		// 事件代码...
+               // alert(node.text);
+                // 百度地图API功能
+              var map = new BMap.Map("allmap");    // 创建Map实例
+              map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+              map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+              map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+              var geolocation = new BMap.Geolocation();
+              geolocation.getCurrentPosition(function(r){
+              if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                var mk = new BMap.Marker(r.point);
+                map.addOverlay(mk);
+                    map.centerAndZoom(r.point, 15);  // 初始化地图,设置中心点坐标和地图级别
 
-</script>
-<script>
+                  } else {
+                    alert('failed'+this.getStatus());
+                  }        
+                },{enableHighAccuracy: true})
+              }
+            });
+          });
+        }
 
-function getTree() {
-  // Some logic to retrieve, or generate tree structure
-  var data = [
-  {
-    text: "Parent 1",
-    nodes: [
-      {
-        text: "Child 1",
-        nodes: [
-          {
-            text: "Grandchild 1"
-          },
-          {
-            text: "Grandchild 2"
-          }
-        ]
-      },
-      {
-        text: "Child 2"
-      }
-    ]
-  },
-  {
-    text: "Parent 2"
-  },
-  {
-    text: "Parent 3"
-  },
-  {
-    text: "Parent 4"
-  },
-  {
-    text: "Parent 5"
-  }
-];
-  return data;
-}
+        $(document).ready(myFunction);
 
+        $('#tree').on('nodeSelected', function(event, data) {
+         alert(data);
 
-function myFunction()
-{
-	$.get("__URL__/group",function(data,status){
-		$('#tree').treeview({
-			data: data,
-			onNodeSelected: function(event, data) {
-    		// 事件代码...
-    			alert(data);
-			}
+        });             
+        $('#tree').on('nodeChecked', function(event, data) {
+         alert(data);
 
-		});
-  	});
-}
+        });        
 
-$(document).ready(myFunction);
+        </script>
 
+<!--你自己的样式文件 -->
 
-$('#tree').on('nodeSelected', function(event, data) {
-      			alert(data);
-
-});             
-$('#tree').on('nodeChecked', function(event, data) {
-      			alert(data);
-
-});           
-</script>
-
-        <!--你自己的样式文件 -->
-             
-        <!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
+<!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-    </head>
-    <body>
-<!---->
-<div class="container-fluid">
-<div class="row">
+      </head>
+      <body>
+        <!---->
+        <div class="container-fluid">
+          <div class="row">
+           <div class="col-md-3" id='tree'></div>
 
-	<div class="col-md-3" id='tree'>
-	</div>
+            <div  class="col-md-9" id="allmap" style="width:697px;height:550px;border:#ccc solid 1px"></div>
+
 	<!-- 
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     分组管理
@@ -113,46 +92,44 @@ $('#tree').on('nodeChecked', function(event, data) {
     <li><a href="#">{$vi.group_name}</a></li>
     </volist>
   </ul>
-  -->
+-->
 
-		<div class="col-md-9">
-			<p>
-				<td>设备属性 当前设备状态： <td>
-			</p>
-			<table class="table">
-				<thead>
-					<tr>
-                      <th>编号</th>
-                      <th>拍照尺寸</th>
-                      <th>拍照质量（1-100之间的整数）</th>
-                      
-                      <th>拍照开始时间（24小时制）</th>
-                      <th>拍照结束时间（24小时制）</th>
-                      <th>拍照频率（分钟）</th>
-                      <th>是否自动拍照</th>
-                    </tr>
-                    <volist name="date" id="vo" >
-                     <tr>
-                    	<td>{$vo.device_id}</td>
-                    	<td>{$vo.device_photo_size}</td>
-                    	<td>{$vo.device_photo_quality}</td>
-        				<td>{$vo.device_photo_starttime}</td>
-        				<td>{$vo.device_photo_endtime}</td>
-        				<td>{$vo.device_frequency}</td>
-        				<td><input type="radio" /> 是</td>
-        			</tr>	
-        			</volist>
-                    
+<!-- 
+<div class="col-md-0">
+ <p>
+  <td>设备属性 当前设备状态： <td>
+  </p>
+  <table class="table">
+    <thead>
+     <tr>
+      <th>编号</th>
+      <th>拍照尺寸</th>
+      <th>拍照质量（1-100之间的整数）</th>
 
-				</thead>
-				<tbody>
-					
-				</tbody>
-			</table>
-			<p>
-				历史图片
-			</p><img alt="140x140" src="img/a.jpg" />
-			<nav>
+      <th>拍照开始时间（24小时制）</th>
+      <th>拍照结束时间（24小时制）</th>
+      <th>拍照频率（分钟）</th>
+      <th>是否自动拍照</th>
+    </tr>
+    <volist name="date" id="vo" >
+       <tr>
+       <td>{$vo.device_id}</td>
+       <td>{$vo.device_photo_size}</td>
+       <td>{$vo.device_photo_quality}</td>
+       <td>{$vo.device_photo_starttime}</td>
+       <td>{$vo.device_photo_endtime}</td>
+       <td>{$vo.device_frequency}</td>
+       <td><input type="radio" /> 是</td>
+     </tr>	
+   </volist>
+
+
+ </thead>
+ <tbody>
+
+ </tbody>
+</table>
+<nav>
   <ul class="pagination">
     <li>
       <a href="#" aria-label="Previous">
@@ -171,17 +148,26 @@ $('#tree').on('nodeChecked', function(event, data) {
     </li>
   </ul>
 </nav>
-			<p>
-				当前已选设备编号：  					实时消息：
-			</p>
-		</div>
-	</div>
+
+
+<p>
+  当前已选设备编号：  					实时消息：
+</p>
+</div>
+-->
+
+
+</div>
 </div>
 </div>
 </div>
 <div><?php
 echo "<p> ".date("Y") . © ." 同瑞信息 版权所有</p>";
 ?></div>
- 
-    </body>
+
+</body>
 </html>
+<script type="text/javascript">
+
+</script>
+
