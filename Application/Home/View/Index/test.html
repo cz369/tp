@@ -21,6 +21,9 @@
         <!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.js"></script> 
         <script src="../../../Public/js/bootstrap-treeview.min.js"></script> 
+        <link rel="stylesheet" href="../../../Public/mdl/material.css">
+		<script src="../../../Public/mdl/material.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <script type="text/javascript">
 
         function myFunction()
@@ -28,6 +31,8 @@
           $.get("__URL__/group",function(data,status){
             $('#tree').treeview({
               data: data,
+              color: "#428bca",
+
               onNodeSelected: function(event, node) {
             		// 事件代码...
                //alert(node.text);
@@ -60,19 +65,13 @@
               }
             });
           });
+
+          
+          
         }
 
         $(document).ready(myFunction);
-
-        $('#tree').on('nodeSelected', function(event, data) {
-         alert(data);
-
-        });             
-        $('#tree').on('nodeChecked', function(event, data) {
-         alert(data);
-
-        });        
-
+   
         </script>
 
 <!--你自己的样式文件 -->
@@ -82,10 +81,55 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-      </head>
-      <body>
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">.col-md-4</div>
+    <div class="col-md-2">.col-md-4</div>
+  </div>
+
+
         
-        
+      	<button id="show-dialog" type="button" class="mdl-button mdl-button--raised mdl-js-button dialog-button" data-upgraded=",MaterialButton">实时拍照</button>
+      	<dialog class="mdl-dialog">
+      		<h4 class="mdl-dialog__title">当前照片</h4>
+      		<div class="mdl-dialog__content">
+<div id="mdl-spinner" class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+      		</div>
+      		<div class="mdl-dialog__actions">
+      			<button type="button" class="mdl-button">Agree</button>
+      			<button type="button" class="mdl-button close">Disagree</button>
+      		</div>
+      	</dialog>
+      	<script>
+      	var dialog = document.querySelector('dialog');
+      	var showDialogButton = document.querySelector('#show-dialog');
+      	if (! dialog.showModal) {
+      		dialogPolyfill.registerDialog(dialog);
+      	}
+      	showDialogButton.addEventListener('click', function() {
+
+      		dialog.showModal();
+      		alert($("#device_id").val());
+      		var device_id = $("#device_id").val();
+
+      		$.post("__URL__/need_photo", {device_id:device_id},function(data,status){
+
+         
+
+      		});
+      	});
+      	dialog.querySelector('.mdl-button').addEventListener('click', function() {
+      		dialog.close();
+      		    //$("#mdl-spinner").remove();
+
+      	});
+      
+
+
+      	</script>
 
 	
   
@@ -93,7 +137,6 @@
 
 
 <div class="col-md-9">
-  <p><a href="">实时拍照</a></p>
   <p> <a href="__URL__/loginout">退出登录</a> </p>
  <p>
   <td>设备属性 当前设备状态： <td>

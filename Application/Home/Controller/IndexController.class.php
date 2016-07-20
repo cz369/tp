@@ -25,13 +25,25 @@ class IndexController extends Controller {
 			$this->display();
 
 		}
-
-		
-		
-		
 	}
-	  
 
+	public function need_photo(){
+		if (IS_POST) {
+			$device_id=$_POST['device_id'];
+			$db=M('device');
+			$db->device_need_photo = 1;
+			$db->where("device_id='$device_id'")->save();
+			$photo->M('picture');
+			$photo->where("device_id='$device_id'")->getField('path');
+			$this->ajaxReturn($photo);
+
+		}
+	}
+
+	 public function loginout(){
+        
+        $this->success('退出成功','index');
+    }
 
 	public function device_info_save(){
 		if (IS_POST) {
@@ -104,6 +116,7 @@ class IndexController extends Controller {
 			$this->display();
 		}
 	}	
+
 
 	public function group() {
 		if (IS_GET) {
