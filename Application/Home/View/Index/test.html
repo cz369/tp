@@ -21,12 +21,20 @@
         <!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.js"></script> 
         <script src="../../../Public/js/bootstrap-treeview.min.js"></script> 
+        <link rel="stylesheet" href="../../../Public/css/bootstrap-treeview.min.css">
         <link rel="stylesheet" href="../../../Public/mdl/material.css">
 		<script src="../../../Public/mdl/material.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <style type="text/css">
+        .treeview {
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+        </style>
+
         <script type="text/javascript">
 
-        function myFunction()
+function myFunction()
         {
           $.get("__URL__/group",function(data,status){
             $('#tree').treeview({

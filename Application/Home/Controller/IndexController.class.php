@@ -13,7 +13,7 @@ class IndexController extends Controller {
 
 			//$result = $db->where('username='.$name.' AND password='.$password)->fetchSql(true)->find();
 			if (!empty($user)) {
-				$this->success('登录成功', 'test');
+				$this->success('登录成功', 'index');
 				// $this->success("ss", 'test');
 			} else {
                   $this->error("用户或密码错误！");  
