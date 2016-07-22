@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="col-md-12">
-                            <img src="../../../Public/1.jpg" width="600" height="800" />
+                            <img id="picture-0" src="../../../Public/1.jpg" width="100%" height="100%" />
                         </div>
                     </div>
 
@@ -115,20 +115,20 @@
 
                         <div class="col-md-6">
                             <div>拍照时间：2016-07-16 08：29；29</div>
-                            <img src="../../../Public/1.jpg" width="200" height="300" />
+                            <img id="picture-1" src="../../../Public/1.jpg" width="100%" height="300" />
                         </div> 
 
                         <div class="col-md-6">
                             <div>拍照时间：2016-07-16 08：29；29</div>
-                            <img src="../../../Public/1.jpg" width="200" height="300" />
+                            <img id="picture-2" src="../../../Public/1.jpg" width="200" height="300" />
                         </div> 
                         <div class="col-md-6">
                             <div>拍照时间：2016-07-16 08：29；29</div>
-                            <img src="../../../Public/1.jpg" width="200" height="300" />
+                            <img id="picture-3" src="../../../Public/1.jpg" width="200" height="300" />
                         </div> 
                         <div class="col-md-6">
                             <div>拍照时间：2016-07-16 08：29；29</div>
-                            <img src="../../../Public/1.jpg" width="200" height="300" />
+                            <img id="picture-4" src="../../../Public/1.jpg" width="200" height="300" />
                         </div> 
                         <div class="col-md-12"> 巡视状态 </div>
                         <div class="col-md-12">
@@ -168,7 +168,7 @@
                 <div class="col-md-6">
                     开机时间：
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sample1" >
+                        <input class="mdl-textfield__input" type="text" id="device-boot" >
                         <label class="mdl-textfield__label" for="sample1">18:00:00</label>
                     </div>
 
@@ -176,7 +176,7 @@
                 <div class="col-md-6">
                     关机时间：
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sample1" >
+                        <input class="mdl-textfield__input" type="text" id="device-off" >
                         <label class="mdl-textfield__label" for="sample1">18:00:00</label>
                     </div>
 
@@ -184,7 +184,7 @@
                 <div class="col-md-6">
                     开始工作时间：
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sample1" >
+                        <input class="mdl-textfield__input" type="text" id="device-start-work" >
                         <label class="mdl-textfield__label" for="sample1">18:00:00</label>
                     </div>
 
@@ -192,7 +192,7 @@
                 <div class="col-md-6">
                     照片像素：
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sample1" >
+                        <input class="mdl-textfield__input" type="text" id="" >
                         <label class="mdl-textfield__label" for="sample1">1500</label>
                     </div>
                     (万像素)  
@@ -208,7 +208,7 @@
                 <div class="col-md-6">
                     拍照间隔：
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sample1" >
+                        <input class="mdl-textfield__input" type="text" id="photo-fre" >
                         <label class="mdl-textfield__label" for="sample1">100</label>
                     </div>
                     (分钟)  
@@ -233,9 +233,10 @@
 
         </div>
         <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button ">应用到该设备</button>
-            <button type="button" class="mdl-button ">应用到该路线下所有设备</button>
-            <button type="button" class="mdl-button ">重启设备</button>
+            <button type="button" class="mdl-button" id="apply-this">应用到该设备</button>
+            <button type="button" class="mdl-button" id="apply-all-line">应用到该路线下所有设备</button>
+            <button type="button" class="mdl-button" id="apply-reboot">重启设备</button>
+            <button type="button" class="mdl-button" id="apply-close">保存关闭</button>
         </div>
  
         </dialog>

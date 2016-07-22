@@ -45,7 +45,7 @@ class IndexController extends Controller {
         $this->success('退出成功','index');
     }
 
-	public function device_info_save(){
+	public function device_info_update(){
 		if (IS_POST) {
 			$device_id=$_POST['device_id'];
 
@@ -117,6 +117,27 @@ class IndexController extends Controller {
 		}
 	}	
 
+	public function device_status() {
+		if (IS_GET) {
+			$device_id = $_GET['device_id'];
+			if($device_id) {
+				$po=M('picture');
+				$photo = $po->where("device_id = '$device_id'")->order('id desc')->limit(5)->select();
+				//var_dump($photo);
+				if (!empty($photo)) {
+					$j = 0;
+					foreach ($photo as $key => $value) {
+						$photo[$j]["path"] = "http://localhost:8080/".$photo[$j]["path"];
+						$j++;
+					}
+				}
+			}
+			$this->ajaxReturn($photo);
+			
+		} else {
+			$this->display();
+		}
+	}
 
 	public function group() {
 		if (IS_GET) {
