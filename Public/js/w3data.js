@@ -1,3 +1,4 @@
+
 /* W3Data ver 1.1 by W3Schools.com */
 var w3DataObject = {};
 function w3DisplayData(id, data) {
@@ -146,4 +147,5 @@ function w3Http(target, readyfunc, xml, method) {
         httpObj.open(method, target, true);
         httpObj.send(xml);
     }
+
 }

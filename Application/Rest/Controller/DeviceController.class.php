@@ -37,6 +37,7 @@ class DeviceController extends RestController {
 	} 
 
 
+
 	public function upload_image () {
 		$base_path = "C:/Wnmp/html/tp"."/picture/"; // 接收文件目录
 		$target_path = $base_path . basename ( $_FILES ['Filedata']['name']); 
@@ -71,6 +72,8 @@ class DeviceController extends RestController {
 		    echo json_encode ( $array );  
 		}
 	}
+
+
 
 	public function device_info () {
 		switch ($this->_method){

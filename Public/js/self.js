@@ -103,7 +103,9 @@ function updateMap(node)
     $.get("device_info",{device_id: node.text}, function(data,status){
         var point = new BMap.Point(data[0].longitude, data[0].latitude);
         var map = new BMap.Map("baidu-device-map");    // 创建Map实例
+
         map.centerAndZoom(point, 15);  // 初始化地图,设置中心点坐标和地图级别
+
         map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
         map.setCurrentCity("济南");          // 设置地图显示的城市 此项是必须设置的
         map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
@@ -177,12 +179,14 @@ function updateSetting()
         });
         alert("设置成功");
         var a = $('input#sample11');
+
         //$("#mdl-spinner").remove();
     });
 
     dialog.querySelector('#apply-all-line').addEventListener('click', function() {
         alert("设置成功");
         var a = $('input#sample11');
+
         //$("#mdl-spinner").remove();
     });
 
@@ -195,6 +199,7 @@ function updateSetting()
         // $.get("device_info", {device_id:device_id},function(data,status){
 
         // });
+
         dialog.close();
         //$("#mdl-spinner").remove();
     });

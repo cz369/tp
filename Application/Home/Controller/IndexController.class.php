@@ -169,8 +169,7 @@ class IndexController extends Controller {
 					$j = 0;
 					
 					foreach ($photo as $key => $value) {
-						$photo[$j]["path"] = "http://139.129.167.13:8888/".$photo[$j]["path"];
-						
+						$photo[$j]["path"] = "http://139.129.167.13:8888/".$photo[$j]["path"];						
 						$j++;
 					}
 				}
