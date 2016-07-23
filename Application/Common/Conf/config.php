@@ -14,6 +14,8 @@ return array(
     
     //'URL_MODEL'          => '2', //URL模式
     //'__CSS__' => __ROOT__ . '/Public/css',
+    'SESSION_AUTO_START' =>true,
+
     
     
 );
