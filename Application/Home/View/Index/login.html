@@ -13,6 +13,17 @@
 <link rel="stylesheet" type="text/css" href="https://getbootstrap.com/examples/signin/signin.css">
 <script src="../../../Public/js/jquery-3.1.0.min.js"></script>
 <script src="../../../Public/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+  $( "#check").on( "click", function() {
+    if ($(":checked").length == 1)  {
+      $("#check").value("checked")  
+    } else {
+      $("#check").value("unchecked")
+    }
+  });
+});
+</script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -23,7 +34,8 @@
   <body>
      <div class="container">
 
-      <form class="form-signin" action="__URL__/index" method="post">
+
+      <form class="form-signin" action="__URL__/login" method="post">
         <h2 class="form-signin-heading">请登录</h2>
         <label for="inputEmail" class="sr-only">用户名</label>
         <input type="text" id="inputEmail" name="username" class="form-control" placeholder="用户名" required autofocus>
@@ -31,7 +43,7 @@
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> 记住登录
+            <input type="checkbox" value="checked" id="check" name="checkbox"> 记住登录
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>

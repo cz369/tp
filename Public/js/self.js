@@ -155,11 +155,20 @@ function updateSetting()
         var device_id = currentNode.text;
 
         $.get("device_info", {device_id:device_id},function(data,status){
-
+            $("#device").text(data[0].device_id);
+            $("#device-boot").val(data[0].device_boot_time);
+            $("#device-off").val(data[0].device_off_time);
+            $("#device-start-work").val(data[0].device_photo_starttime)
         });
     });
 
     dialog.querySelector('#apply-this').addEventListener('click', function() {
+        
+        var device_id = currentNode.text;
+        var device_photo_starttime = $('input#device-start-work').val();
+        $.post("device_info_save", {device_id:device_id ,device_photo_starttime:device_photo_starttime},function(data,status){
+            
+        });
         alert($('input#sample11.mdl-textfield__input').val("111"));
         var a = $('input#sample11');
         dialog.close();
